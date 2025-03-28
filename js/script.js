@@ -8,19 +8,52 @@ const snake = [
     {x:230, y:200},
 ]
 
+let direction = "up"
+
 const drawSnake = () => {
     ctx.fillStyle = "#ddd"
 
     snake.forEach((position, index) => {
 
-        if(index == snake.length -1){
+        if(index === snake.length -1){
             ctx.fillStyle = "darkmagenta"
         }
         ctx.fillRect(position.x, position.y, size, size)
     })
 }
 
-drawSnake();
+const moveSnake = () => {
+    if (!direction) return
+
+    const head = snake[snake.length -1]
+
+    if (direction === "right"){
+        snake.push({x: head.x + size, y: head.y})
+    }
+
+    if (direction === "left"){
+        snake.push({x: head.x - size, y: head.y})
+    }
+
+    if (direction === "down"){
+        snake.push({x: head.x, y: head.y + size})
+    }
+
+    if (direction === "up"){
+        snake.push({x: head.x, y: head.y - size})
+    }
+
+    snake.shift()
+}
+
+setInterval(()=>{
+    ctx.clearRect(0, 0, 600, 600)
+
+    moveSnake();
+    drawSnake();
+}, 300)
+
+
 
 
 

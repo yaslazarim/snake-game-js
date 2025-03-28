@@ -8,7 +8,7 @@ const snake = [
     {x:230, y:200},
 ]
 
-let direction = "up"
+let direction
 
 const drawSnake = () => {
     ctx.fillStyle = "#ddd"
@@ -46,12 +46,21 @@ const moveSnake = () => {
     snake.shift()
 }
 
-setInterval(()=>{
+const gameLoop = ()=>{
     ctx.clearRect(0, 0, 600, 600)
 
     moveSnake();
     drawSnake();
+}
+
+setInterval(()=>{
+    gameLoop()
 }, 300)
+
+
+
+
+
 
 
 

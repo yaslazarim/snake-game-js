@@ -6,9 +6,22 @@ const size = 30
 
 const snake = [{x:270, y:240}]
 
+const randomNumber = (min, max) => {
+    return Math.round(Math.random() * (max - min) + min)
+}
+
+const randomPosition = () => {
+    const number = randomNumber(0, canvas.width - size)
+    return Math.round(number / 30) * 30
+}
+
+const randomColor = () =>{
+
+}
+
 const food = {
-    x:90,
-    y:90,
+    x:randomPosition(0, 570),
+    y:randomPosition(0, 570),
     color: "white"
 }
 

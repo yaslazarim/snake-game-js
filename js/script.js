@@ -6,10 +6,26 @@ const size = 30
 
 const snake = [{x:270, y:240}]
 
+const food = {
+    x:90,
+    y:90,
+    color: "white"
+}
+
 let direction
 
+const drawFood = () => {
+    const {x, y, color} = food
+
+    ctx.shadowColor = color
+    ctx.shadowBlur = 6
+    ctx.fillStyle = food.color
+    ctx.fillRect(x, y, size, size)
+    ctx.shadowBlur = 0
+}
+
 const drawSnake = () => {
-    ctx.fillStyle = "#ddd"
+    ctx.fillStyle = "white"
 
     snake.forEach((position, index) => {
 
@@ -46,7 +62,7 @@ const moveSnake = () => {
 
 const gameLoop = ()=>{
     ctx.clearRect(0, 0, 600, 600)
-
+    drawFood();
     moveSnake();
     drawSnake();
 }

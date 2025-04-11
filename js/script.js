@@ -15,13 +15,9 @@ const randomPosition = () => {
     return Math.round(number / 30) * 30
 }
 
-const randomColor = () =>{
-
-}
-
 const food = {
-    x:randomPosition(0, 570),
-    y:randomPosition(0, 570),
+    x:randomPosition(),
+    y:randomPosition(),
     color: "white"
 }
 
@@ -73,11 +69,30 @@ const moveSnake = () => {
     snake.shift()
 }
 
+const checkEat = () => {
+    const head = snake[snake.length -1]
+    if (head.x == food.x && head.y == food.y){
+        snake.push(head)
+
+        let x = randomPosition()
+        let y = randomPosition()
+        
+        while(snake.find((position) => position.x == x && position.y == y)){
+            x = randomPosition()
+            y = randomPosition()
+        }
+
+        food.x = x
+        food.y = y
+    }
+}
+
 const gameLoop = ()=>{
     ctx.clearRect(0, 0, 600, 600)
-    drawFood();
-    moveSnake();
-    drawSnake();
+    drawFood()
+    moveSnake()
+    drawSnake()
+    checkEat()
 }
 
 setInterval(()=>{

@@ -1,6 +1,12 @@
 const canvas = document.querySelector("canvas")
 const ctx = canvas.getContext("2d")
 
+const score = document.querySelector(".score--value")
+const finalScore = document.querySelector(".final-score > span")
+const menu = document.querySelector(".menu-screen")
+const buttonPlay = document.querySelector(".btn-play")
+
+
 const audio = new  Audio("../assets/audio.mp3")
 
 const size = 30
@@ -88,7 +94,7 @@ const checkEat = () => {
     }
 }
 
-const chekCollision = () => {
+const checkCollision = () => {
     const head = snake[snake.length -1]
     const canvasLimit = canvas.width - size
     const neckIndex = snake.length - 2
@@ -104,13 +110,17 @@ const chekCollision = () => {
     }
 }
 
+const gameOver = () => {
+    direction = undefined
+}
+
 const gameLoop = ()=>{
     ctx.clearRect(0, 0, 600, 600)
     drawFood()
     moveSnake()
     drawSnake()
     checkEat()
-    chekCollision()
+    checkCollision()
 }
 
 setInterval(()=>{

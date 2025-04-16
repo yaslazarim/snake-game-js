@@ -86,6 +86,15 @@ const checkEat = () => {
         incrementScore()
         snake.push(head)
         audio.play()
+
+        gameInterval = Math.floor(gameInterval - (gameInterval * 0.05))
+        clearInterval(intervalReference)
+        intervalReference = setInterval(()=>{
+            gameLoop()
+        
+        }, gameInterval)
+        console.log(`Speed snake is: ${gameInterval}`)
+
         let x = randomPosition()
         let y = randomPosition()
         
@@ -121,6 +130,12 @@ const gameOver = () => {
     menu.style.display = "flex"
     finalScore.innerText = score.innerText
     canvas.style.filter = "blur(2px)"
+    clearInterval(intervalReference)
+    gameInterval=300
+    intervalReference = setInterval(()=>{
+        gameLoop()
+    
+    }, gameInterval)
 }
 
 const gameLoop = ()=>{
@@ -132,9 +147,12 @@ const gameLoop = ()=>{
     checkCollision()
 }
 
-setInterval(()=>{
+let gameInterval = 300
+
+let intervalReference = setInterval(()=>{
     gameLoop()
-}, 300)
+
+}, gameInterval)
 
 
 document.addEventListener("keydown", ({ key }) => {

@@ -13,6 +13,10 @@ const size = 30
 
 const snake = [{x:270, y:240}]
 
+const incrementScore = () =>{
+    score.innerText = parseInt(score.innerText) + 10
+}
+
 const randomNumber = (min, max) => {
     return Math.round(Math.random() * (max - min) + min)
 }
@@ -79,6 +83,7 @@ const moveSnake = () => {
 const checkEat = () => {
     const head = snake[snake.length -1]
     if (head.x == food.x && head.y == food.y){
+        incrementScore()
         snake.push(head)
         audio.play()
         let x = randomPosition()
@@ -106,12 +111,16 @@ const checkCollision = () => {
     })
 
     if (wallCollision || selfCollision) {
-        alert("Você perdeu!")
+        gameOver()
     }
 }
 
 const gameOver = () => {
     direction = undefined
+
+    menu.style.display = "flex"
+    finalScore.innerText - score
+    canvas.style.filter = "blur(2px)"
 }
 
 const gameLoop = ()=>{

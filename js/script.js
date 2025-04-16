@@ -11,7 +11,7 @@ const audio = new  Audio("../assets/audio.mp3")
 
 const size = 30
 
-const snake = [{x:270, y:240}]
+let snake = [{x:270, y:240}]
 
 const incrementScore = () =>{
     score.innerText = parseInt(score.innerText) + 10
@@ -119,7 +119,7 @@ const gameOver = () => {
     direction = undefined
 
     menu.style.display = "flex"
-    finalScore.innerText - score
+    finalScore.innerText = score.innerText
     canvas.style.filter = "blur(2px)"
 }
 
@@ -150,5 +150,13 @@ document.addEventListener("keydown", ({ key }) => {
     if (key == "ArrowUp" && direction != "down"){
         direction = "up"
     }
+})
+
+buttonPlay.addEventListener("click", () =>{
+    score.innerText = "00"
+    menu.style.display = "none"
+    canvas.style.filter = "none"
+     
+    snake = [{x:270, y:240}]
 })
 
